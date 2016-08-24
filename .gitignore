@@ -1,4 +1,3 @@
-# Created by https://www.gitignore.io/api/python
 ### Custom ###
 *.json
 ### Python ###
@@ -47,6 +46,10 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+<<<<<<< HEAD
+=======
+.hypothesis/
+>>>>>>> a22f8f2bd5db562565943ef79def5903b8e6be65
 
 # Translations
 *.mo
@@ -54,9 +57,45 @@ coverage.xml
 
 # Django stuff:
 *.log
+<<<<<<< HEAD
+=======
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+>>>>>>> a22f8f2bd5db562565943ef79def5903b8e6be65
 
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
+<<<<<<< HEAD
+=======
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+>>>>>>> a22f8f2bd5db562565943ef79def5903b8e6be65
