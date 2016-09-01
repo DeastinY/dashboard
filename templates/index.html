@@ -15,23 +15,55 @@
     <div class="jumbotron">
         <h1>Lightcontrol</h1>
         <div class="row">
-
-            <div class="col-xs-6 col-sm-3">
-                <div class="card text-xs-center">
-                    <h3 class="card-header">Lamp</h3>
-                    <div class="card-block">
-                        <button type="button" class="btn btn-warning btn-circle btn-lg">?</button>
-                        <button type="button" class="btn btn-warning btn-circle btn-lg">?</button>
-                        <button type="button" class="btn btn-warning btn-circle btn-lg">?</button>
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary">ON</button>
-                            <button type="button" class="btn btn-secondary">OFF</button>
+            {% for gkey, gvalue in groups.items() %}
+                <div class="col-xs-6 col-sm-3">
+                    <div class="card text-xs-center">
+                        <h3 class="card-header">{{ gvalue['name'] }}</h3>
+                        <div class="card-block">
+                            {% for l in gvalue['lights'] %}
+                                <button type="button"
+                                        class="btn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
+                            {% endfor %}
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-secondary">ON</button>
+                                <button type="button" class="btn btn-secondary">OFF</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target=".{{ gvalue['name'] }}-help-modal">Help
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal fade {{ gvalue['name'] }}-help-modal" tabindex="-1" role="dialog"
+                     aria-labelledby="help" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="jumbotron">
+                                <h3>Light Names</h3>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for l in gvalue['lights'] %}
+                                        <tr>
+                                            <th scope="row">{{ l|int }}</th>
+                                            <td>{{ bridge.get_light(l|int,'name') }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
 
         </div>
     </div>
