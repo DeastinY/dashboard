@@ -26,13 +26,13 @@
                         <h3 class="card-header">{{ gvalue['name'] }}</h3>
                         <div class="card-block">
                             {% for l in gvalue['lights'] %}
-                                <button type="submit" name="{{ l }}" class="btn lightbtn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
+                                <button type="submit" name="l{{ l }}" class="btn lightbtn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
                             {% endfor %}
                         </div>
                         <div class="card-footer">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-secondary">ON</button>
-                                <button type="button" class="btn btn-secondary">OFF</button>
+                                <button type="button" class="btn onbtn btn-secondary" name="{{ gkey }}">ON</button>
+                                <button type="button" class="btn offbtn btn-secondary" name="{{ gkey }}">OFF</button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target=".{{ gvalue['name'] }}-help-modal">Help
                                 </button>
