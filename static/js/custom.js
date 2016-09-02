@@ -69,3 +69,9 @@ $(function() {
         });
     });
 });
+$(document).ready(function() {
+    setInterval(function() {
+        console.log("penis");
+    }, 1000 * 10);
+});
+
