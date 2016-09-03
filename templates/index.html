@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/pick-a-color-1.2.3.min.css">
     <link rel="stylesheet" href="static/css/custom.css">
 
     <!-- Show IP Address -->
@@ -26,7 +24,8 @@
                         <h3 class="card-header">{{ gvalue['name'] }}</h3>
                         <div class="card-block">
                             {% for l in gvalue['lights'] %}
-                                <button type="submit" name="l{{ l }}" class="btn lightbtn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
+                                <button type="submit" name="l{{ l }}"
+                                        class="btn lightbtn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
                             {% endfor %}
                         </div>
                         <div class="card-footer">
@@ -67,6 +66,30 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="card text-xs-center">
+                    <h3 class="card-header">Colors</h3>
+                    <div class="card-block">
+                        <div style="margin-bottom: 5%">
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                        </div>
+                        <input style="!important display: inline-block;" type="text" value="white" name="colorpicker" class="pick-a-color form-control">
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn onbtn btn-secondary">ALL</button>
+                            <button type="button" class="btn onbtn btn-secondary">NONE</button>
+                            <button type="button" class="btn onbtn btn-secondary">ON</button>
+                            <button type="button" class="btn onbtn btn-secondary">OFF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="jumbotron">
@@ -91,5 +114,7 @@
         crossorigin="anonymous"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/custom.js"></script>
+<script src="static/js/tinycolor-0.9.15.min.js"></script>
+<script src="static/js/pick-a-color-1.2.3.min.js"></script>
 </body>
 </html>

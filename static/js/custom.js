@@ -73,5 +73,15 @@ $(document).ready(function() {
     setInterval(function() {
         console.log("penis");
     }, 1000 * 10);
+    $(".pick-a-color").pickAColor({
+        showSpectrum          : true,
+        showSavedColors       : true,
+        saveColorsPerElement  : false,
+        fadeMenuToggle        : false,
+        showAdvanced          : true,
+        showBasicColors       : false,
+        showHexInput          : false,
+        allowBlank            : false
+    });
 });
 
