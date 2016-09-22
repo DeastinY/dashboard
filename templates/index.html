@@ -71,21 +71,19 @@
                     <h3 class="card-header">Colors</h3>
                     <div class="card-block">
                         <div style="margin-bottom: 5%">
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
-                            <button type="submit" name="1" class="btn btn-default btn-circle btn-lg">1</button>
+                            {% for gkey, gvalue in groups.items() %}
+                                {% for l in gvalue['lights'] %}
+                                    <button type="submit" name="l{{ l }}" class="btn togglebtn {% if bridge.get_light(l|int, 'on') %} btn-warning {% else %}btn-default{% endif %} btn-circle btn-lg">{{ l }}</button>
+                                {% endfor %}
+                            {% endfor %}
                         </div>
                         <input style="!important display: inline-block;" type="text" value="white" name="colorpicker" class="pick-a-color form-control">
                     </div>
                     <div class="card-footer">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn onbtn btn-secondary">ALL</button>
-                            <button type="button" class="btn onbtn btn-secondary">NONE</button>
-                            <button type="button" class="btn onbtn btn-secondary">ON</button>
-                            <button type="button" class="btn onbtn btn-secondary">OFF</button>
+                            <button type="button" class="btn callbtn btn-secondary">ALL</button>
+                            <button type="button" class="btn cnonebtn btn-secondary">NONE</button>
+                            <button type="button" class="btn csetbtn btn-secondary">SET</button>
                         </div>
                     </div>
                 </div>
