@@ -14,6 +14,8 @@ b.connect()
 groups = OrderedDict(sorted(b.get_group().items()))
 global_lights = b.get_light_objects('id')
 
+scenesdir = os.path.join(os.path.dirname(__file__), 'scenes')
+
 
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -78,7 +80,6 @@ def lightcolor():
         global_lights[l].value = v
 
 
-
 @app.route('/scenecreator_savebtn', methods=["POST"])
 def scenecreator_savebtn():
     r = request.get_json()
@@ -96,16 +97,16 @@ def scenecreator_savebtn():
             "brightness": gl.brightness
         })
 
-    fn = os.path.join(os.path.dirname(__file__), 'scenes', name+'.json')
+    fn = os.path.join(scenesdir, name+'.json')
     with open(fn, 'w+') as f:
-            json.dump(scene, f,indent=4,sort_keys=True)
+            json.dump(scene, f, indent=4, sort_keys=True)
     return jsonify(success=True)
 
 
 @app.route('/scenecreator_showbtn', methods=["POST"])
 def scenecreator_showbtn():
-    print("scenecreator_showbtn")
-    return jsonify(success=True)
+    scenes = [f for f in os.listdir(scenesdir) if os.isfile(os.path.join(scenesdir, f))]
+    return jsonify(success=True, scenes=scenes)
 
 
 @app.route('/audiograbber_savebtn', methods=["POST"])

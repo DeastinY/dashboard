@@ -127,9 +127,16 @@ $(function() {
             }),
             success: function(response) {
                 console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
+                var alert = $(".scenecreator_alert");
+                if (response["success"] == false) {
+                    alert.html("<strong>Something went wrong.</strong> Double check the name maybe ...");
+                    alert.removeClass("alert-success")
+                    alert.addClass("alert-danger");
+                    alert.show();
+                }
+                else {
+                    alert.hide();
+                }
             }
         });
     });
@@ -141,6 +148,7 @@ $(function() {
             dataType : 'json',
             success: function(response) {
                 console.log(response);
+                $(".scenecreator_alert").show();
             },
             error: function(error) {
                 console.log(error);
