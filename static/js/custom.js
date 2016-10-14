@@ -112,6 +112,70 @@ $(function() {
             }
         });
     });
+    $('.scenecreator_savebtn').click(function() {
+        $.ajax({
+            url: '/scenecreator_savebtn',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            data: JSON.stringify({
+                "name" : "test"
+            }),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    $('.scenecreator_showbtn').click(function() {
+        $.ajax({
+            url: '/scenecreator_showbtn',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    $('.audiograbber_savebtn').click(function() {
+        $.ajax({
+            url: '/audiograbber_savebtn',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            data: JSON.stringify({
+                "name" : "test",
+                "url" : "test"
+            }),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    $('.audiograbber_showbtn').click(function() {
+        $.ajax({
+            url: '/audiograbber_showbtn',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
 });
 $(document).ready(function() {
     setInterval(function() {

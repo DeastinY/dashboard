@@ -74,5 +74,30 @@ def lightcolor():
         global_lights[l].value = v
     return jsonify(success=True)
 
+
+@app.route('/scenecreator_savebtn', methods=["POST"])
+def scenecreator_savebtn():
+    print("scenecreator_savebtn")
+    return jsonify(success=True)
+
+
+@app.route('/scenecreator_showbtn', methods=["POST"])
+def scenecreator_showbtn():
+    print("scenecreator_showbtn")
+    return jsonify(success=True)
+
+
+@app.route('/audiograbber_savebtn', methods=["POST"])
+def audiograbber_savebtn():
+    print("audiograbber_savebtn")
+    return jsonify(success=True)
+
+
+@app.route('/audiograbber_showbtn', methods=["POST"])
+def audiograbber_showbtn():
+    print("audiograbber_showbtn")
+    return jsonify(success=True)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
