@@ -135,7 +135,10 @@ $(function() {
                     alert.show();
                 }
                 else {
-                    alert.hide();
+                    alert.html("<strong>Saved.</strong>");
+                    alert.removeClass("alert-danger")
+                    alert.addClass("alert-success");
+                    alert.show();
                 }
             }
         });
