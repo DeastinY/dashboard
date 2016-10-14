@@ -100,7 +100,7 @@ def scenecreator_savebtn():
     fn = os.path.join(scenesdir, name+'.json')
     with open(fn, 'w+') as f:
             json.dump(scene, f, indent=4, sort_keys=True)
-    return jsonify(success=True)
+    return jsonify(success=True, name=name)
 
 
 @app.route('/scenecreator_showbtn', methods=["POST"])

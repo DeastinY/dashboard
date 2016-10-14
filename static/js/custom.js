@@ -135,7 +135,7 @@ $(function() {
                     alert.show();
                 }
                 else {
-                    alert.html("<strong>Saved.</strong>");
+                    alert.html("<strong>Saved "+response["name"]+" successfully ! </strong>");
                     alert.removeClass("alert-danger")
                     alert.addClass("alert-success");
                     alert.show();
@@ -156,6 +156,19 @@ $(function() {
                 alert.addClass("alert-success");
                 alert.html("<strong>These are the existing scenes : </strong>"+[for (s of response["scenes"]) " </br>"+s]);
                 alert.show();
+            }
+        });
+    });
+    $('.scenes_synchronisebtn').click(function() {
+        $.ajax({
+            url: '/scenecreator_showbtn',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            success: function(response) {
+                console.log(response);
+                var lg = $(".scenes_listgroup");
+                lg.html([for (s of response["scenes"]) "<button type=\"button\" class=\"list-group-item list-group-item-action\">"+s+"</button>"]);
             }
         });
     });
