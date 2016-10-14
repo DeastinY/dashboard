@@ -13,6 +13,7 @@ b = Bridge('192.168.1.15')  # Enter IP here
 b.connect()
 groups = OrderedDict(sorted(b.get_group().items()))
 global_lights = b.get_light_objects('id')
+global_lights_names = b.get_light_objects('name')
 
 scenesdir = os.path.join(os.path.dirname(__file__), 'scenes')
 
@@ -23,9 +24,25 @@ def get_ip_address():
     return s.getsockname()[0]
 
 
+def get_scenenames():
+    ret = [f.split('.')[:-1] for f in os.listdir(scenesdir) if os.path.isfile(os.path.join(scenesdir, f))]
+    print(ret)
+    return ret
+
+
+def load_scene(s):
+    s=s.replace('\n','').replace('\t','')
+    with open(os.path.join(scenesdir, s+".json")) as f:
+        lights = json.load(f)
+        for l in lights:
+            lamp = global_lights_names[l['lamp']]
+            lamp.hue = int(l['hue'])
+            lamp.saturation = int(l['saturation'])
+            lamp.brightness = int(l['brightness'])
+
 @app.route('/')
 def hello_world():
-    return render_template('index.html', groups=groups, bridge=b, ip=get_ip_address())
+    return render_template('index.html', groups=groups, bridge=b, ip=get_ip_address(), scenes=get_scenenames())
 
 
 @app.route('/togglelight', methods=["POST"])
@@ -103,12 +120,6 @@ def scenecreator_savebtn():
     return jsonify(success=True, name=name)
 
 
-@app.route('/scenecreator_showbtn', methods=["POST"])
-def scenecreator_showbtn():
-    scenes = [f.split('.')[:-1] for f in os.listdir(scenesdir) if os.path.isfile(os.path.join(scenesdir, f))]
-    return jsonify(success=True, scenes=scenes)
-
-
 @app.route('/audiograbber_savebtn', methods=["POST"])
 def audiograbber_savebtn():
     print("audiograbber_savebtn")
@@ -123,7 +134,8 @@ def audiograbber_showbtn():
 @app.route('/apply_scene', methods=["POST"])
 def apply_scene():
     name = request.get_json()["name"]
-    print(name  )
+    print("Applying scene {}".format(name))
+    load_scene(name)
     return jsonify(success=True)
 
 

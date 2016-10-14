@@ -159,19 +159,6 @@ $(function() {
             }
         });
     });
-    $('.scenes_synchronisebtn').click(function() {
-        $.ajax({
-            url: '/scenecreator_showbtn',
-            type: 'POST',
-            contentType : 'application/json',
-            dataType : 'json',
-            success: function(response) {
-                console.log(response);
-                var lg = $(".scenes_listgroup");
-                lg.html([for (s of response["scenes"]) "<button type=\"button\" class=\"list-group-item list-group-item-action scenes_btn\">"+s+"</button>"]);
-            }
-        });
-    });
     $('.scenes_btn').click(function() {
         $.ajax({
             url: '/apply_scene',
@@ -235,4 +222,3 @@ $(document).ready(function() {
         allowBlank            : false
     });
 });
-

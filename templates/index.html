@@ -143,13 +143,9 @@
                         <h3 class="card-header">Scenes</h3>
                         <div class="card-block">
                             <div class="list-group scenes_listgroup" style="max-height:300px; overflow-y:auto;">
-                              <button type="button" class="list-group-item list-group-item-action active">
-                                Cras justo odio
-                              </button>
-                              <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                              <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                              <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                              <button type="button" class="list-group-item list-group-item-action disabled">Vestibulum at eros</button>
+                              {% for s in scenes %}
+                              <button type="button" class="list-group-item list-group-item-action scenes_btn">{{ s[0] }}</button>
+                              {% endfor %}
                             </div>
                         </div>
                         <div class="card-footer">
