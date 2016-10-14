@@ -148,10 +148,11 @@ $(function() {
             dataType : 'json',
             success: function(response) {
                 console.log(response);
-                $(".scenecreator_alert").show();
-            },
-            error: function(error) {
-                console.log(error);
+                var alert = $(".scenecreator_alert");
+                alert.removeClass("alert-danger");
+                alert.addClass("alert-success");
+                alert.html("<strong>These are the existing scenes : </strong>"+[for (s of response["scenes"]) " </br>"+s]);
+                alert.show();
             }
         });
     });

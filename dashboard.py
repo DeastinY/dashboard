@@ -83,7 +83,7 @@ def lightcolor():
 @app.route('/scenecreator_savebtn', methods=["POST"])
 def scenecreator_savebtn():
     r = request.get_json()
-    lights, name = r['lights'], r['name']
+    lights, name = r['lights'], r['name'].lower()
     if len(name) == 0:
         return jsonify(success=False)
     lights = [int(l) for l in lights]
@@ -105,7 +105,7 @@ def scenecreator_savebtn():
 
 @app.route('/scenecreator_showbtn', methods=["POST"])
 def scenecreator_showbtn():
-    scenes = [f for f in os.listdir(scenesdir) if os.isfile(os.path.join(scenesdir, f))]
+    scenes = [f.split('.')[:-1] for f in os.listdir(scenesdir) if os.path.isfile(os.path.join(scenesdir, f))]
     return jsonify(success=True, scenes=scenes)
 
 
