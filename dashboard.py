@@ -120,6 +120,14 @@ def audiograbber_showbtn():
     print("audiograbber_showbtn")
     return jsonify(success=True)
 
+@app.route('/apply_scene', methods=["POST"])
+def apply_scene():
+    name = request.get_json()["name"]
+    print(name  )
+    return jsonify(success=True)
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

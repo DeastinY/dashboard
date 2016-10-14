@@ -168,7 +168,21 @@ $(function() {
             success: function(response) {
                 console.log(response);
                 var lg = $(".scenes_listgroup");
-                lg.html([for (s of response["scenes"]) "<button type=\"button\" class=\"list-group-item list-group-item-action\">"+s+"</button>"]);
+                lg.html([for (s of response["scenes"]) "<button type=\"button\" class=\"list-group-item list-group-item-action scenes_btn\">"+s+"</button>"]);
+            }
+        });
+    });
+    $('.scenes_btn').click(function() {
+        $.ajax({
+            url: '/apply_scene',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType : 'json',
+            data: JSON.stringify({
+                "name" : $(this).html()
+            }),
+            success: function(response) {
+                console.log(response);
             }
         });
     });
