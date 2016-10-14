@@ -4,6 +4,8 @@ from collections import OrderedDict
 
 from flask import Flask, render_template, jsonify, request
 from phue import Bridge
+import json
+import os
 
 app = Flask(__name__)
 b = Bridge('192.168.1.15')  # Enter IP here
@@ -55,6 +57,8 @@ def lightoff():
 
 @app.route('/lightcolor', methods=["POST"])
 def lightcolor():
+    return jsonify(success=True)
+    # WIP
     lights = request.get_json()['lights']
     lights = [int(l) for l in lights]
     color = request.get_json()['color']
@@ -72,12 +76,29 @@ def lightcolor():
         global_lights[l].hue = h
         global_lights[l].saturation = s
         global_lights[l].value = v
-    return jsonify(success=True)
+
 
 
 @app.route('/scenecreator_savebtn', methods=["POST"])
 def scenecreator_savebtn():
-    print("scenecreator_savebtn")
+    r = request.get_json()
+    lights, name = r['lights'], r['name']
+    if len(name) == 0:
+        return jsonify(success=False)
+    lights = [int(l) for l in lights]
+    scene = []
+    for l in lights:
+        gl = global_lights[l]
+        scene.append({
+            "lamp": gl.name,
+            "hue": gl.hue,
+            "saturation": gl.saturation,
+            "brightness": gl.brightness
+        })
+
+    fn = os.path.join(os.path.dirname(__file__), 'scenes', name+'.json')
+    with open(fn, 'w+') as f:
+            json.dump(scene, f,indent=4,sort_keys=True)
     return jsonify(success=True)
 
 

@@ -94,7 +94,6 @@ $(function() {
         $(".togglebtn.btn-warning").each(function (i, obj) {
             lights.push(obj.innerHTML);
         });
-        console.log(lights);
         $.ajax({
             url: '/lightcolor',
             type: 'POST',
@@ -113,13 +112,18 @@ $(function() {
         });
     });
     $('.scenecreator_savebtn').click(function() {
+        var lights = [];
+        $(".togglebtn.btn-warning").each(function (i, obj) {
+            lights.push(obj.innerHTML);
+        });
         $.ajax({
             url: '/scenecreator_savebtn',
             type: 'POST',
             contentType : 'application/json',
             dataType : 'json',
             data: JSON.stringify({
-                "name" : "test"
+                "name" : $(".scenecreator_name").val(),
+                "lights" : lights
             }),
             success: function(response) {
                 console.log(response);
