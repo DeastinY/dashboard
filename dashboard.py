@@ -67,7 +67,7 @@ def lightcolor():
 
     print(color)
     print(h, s, v)
-    wtimbretoaidheitsaohucgtehbudaocetsudreotsu
+
     for l in lights:
         global_lights[l].hue = h
         global_lights[l].saturation = s

@@ -34,3 +34,7 @@ body{margin:40px;}
   line-height: 1.33;
   border-radius: 55px;
 }
+.input-group-addon {
+  min-width:110px;
+  text-align:left;
+}
